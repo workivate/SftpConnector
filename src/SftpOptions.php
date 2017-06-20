@@ -82,7 +82,7 @@ final class SftpOptions extends EncapsulatedOptions
      */
     public function getAuthenticationCredentials()
     {
-        return $this->get(AuthenticationMethodToPropertyMapping::getMapping($this->getAuthenticationMethod()->value()));
+        return $this->get(AuthenticationMethodToPropertyMapping::getMapping($this->getAuthenticationMethod()));
     }
 
     /**
