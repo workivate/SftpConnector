@@ -6,80 +6,93 @@ use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 
 final class SftpOptions extends EncapsulatedOptions
 {
-    private $host;
-
-    private $port = 22;
-
-    /**
-     * @var string|RSA
-     */
-    private $authenticationSecurity;
-
-    private $timeout = 10;
-
-    private $username = '';
-
     /**
      * @param string $host
      */
     public function __construct($host) {
-        $this->host = $host;
+        $this->set('host', $host);
+
+        $this->setDefaults([
+            'port' => 22,
+            'timeout' => 10,
+            'username' => ''
+        ]);
     }
 
     public function getHost()
     {
-        return $this->host;
+        return $this->get('host');
     }
 
     /**
      * @param int $port
+     *
+     * @return $this
      */
     public function setPort($port)
     {
-        $this->port = $port;
+        return $this->set('port', $port);
     }
 
+    /**
+     * @return int
+     */
     public function getPort()
     {
-        return $this->port;
+        return $this->get('port');
     }
 
     /**
      * @param string|RSA $authenticationSecurity
+     *
+     * @return $this
      */
     public function setAuthenticationSecurity($authenticationSecurity)
     {
-        $this->authenticationSecurity = $authenticationSecurity;
+        return $this->set('authenticationSecurity', $authenticationSecurity);
     }
 
+    /**
+     * @return string|RSA
+     */
     public function getAuthenticationSecurity()
     {
-        return $this->authenticationSecurity;
+        return $this->get('authenticationSecurity');
     }
 
     /**
      * @param int $timeout
+     *
+     * @return $this
      */
     public function setTimeout($timeout)
     {
-        $this->timeout = $timeout;
+        return $this->set('timeout', $timeout);
     }
 
+    /**
+     * @return int
+     */
     public function getTimeout()
     {
-        return $this->timeout;
+        return $this->get('timeout');
     }
 
     /**
      * @param string $username
+     *
+     * @return $this
      */
     public function setUsername($username)
     {
-        $this->username = $username;
+        return $this->set('username', $username);
     }
 
+    /**
+     * @return string
+     */
     public function getUsername()
     {
-        return $this->username;
+        return $this->get('username');
     }
 }
