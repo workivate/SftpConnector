@@ -9,6 +9,7 @@ final class SftpOptions extends EncapsulatedOptions
     const DEFAULT_PORT = 22;
     const DEFAULT_TIMEOUT = 10;
     const DEFAULT_USERNAME = '';
+    const DEFAULT_PASSWORD = '';
 
     /**
      * @param string $host
@@ -20,6 +21,7 @@ final class SftpOptions extends EncapsulatedOptions
             'port' => self::DEFAULT_PORT,
             'timeout' => self::DEFAULT_TIMEOUT,
             'username' => self::DEFAULT_USERNAME,
+            'password' => self::DEFAULT_PASSWORD,
             'authenticationMethod' => AuthenticationMethod::BASIC(),
         ]);
     }
