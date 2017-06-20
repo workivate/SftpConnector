@@ -1,0 +1,30 @@
+{
+  "name": "Porter-connectors/SftpConnector",
+  "description": "SftpConnecter for Porter.",
+  "authors": [
+    {
+      "name": "Dorian",
+      "email": "dorianfleury@gmail.com"
+    }
+  ],
+  "require": {
+    "scriptfusion/porter": ">=3,<4",
+    "phpseclib/phpseclib": "^2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5"
+  },
+  "autoload": {
+    "psr-4": {
+      "SftpConnector\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SftpConnectorTest\\": "test"
+    }
+  },
+  "scripts": {
+    "test": "phpunit -c test"
+  }
+}
