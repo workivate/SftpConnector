@@ -5,7 +5,7 @@ use phpseclib\Crypt\RSA;
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
 
-class SftpOptionsTest extends \PHPUnit_Framework_TestCase
+final class SftpOptionsTest extends \PHPUnit_Framework_TestCase
 {
     const HOST = 'foo';
 
