@@ -58,14 +58,6 @@ final class SftpOptions extends EncapsulatedOptions
     }
 
     /**
-     * @return RSA
-     */
-    public function getRsaKey()
-    {
-        return $this->get('rsaKey');
-    }
-
-    /**
      * @param string $password
      *
      * @return $this
@@ -76,14 +68,6 @@ final class SftpOptions extends EncapsulatedOptions
     }
 
     /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->get('password');
-    }
-
-    /**
      * @param AuthenticationMethod $authenticationMethod
      *
      * @return $this
@@ -91,14 +75,6 @@ final class SftpOptions extends EncapsulatedOptions
     public function setAuthenticationMethod(AuthenticationMethod $authenticationMethod)
     {
         return $this->set('authenticationMethod', $authenticationMethod);
-    }
-
-    /**
-     * @return AuthenticationMethod
-     */
-    public function getAuthenticationMethod()
-    {
-        return $this->get('authenticationMethod');
     }
 
     /**
@@ -143,5 +119,13 @@ final class SftpOptions extends EncapsulatedOptions
     public function getUsername()
     {
         return $this->get('username');
+    }
+
+    /**
+     * @return AuthenticationMethod
+     */
+    private function getAuthenticationMethod()
+    {
+        return $this->get('authenticationMethod');
     }
 }
