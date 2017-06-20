@@ -6,6 +6,10 @@ use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 
 final class SftpOptions extends EncapsulatedOptions
 {
+    const DEFAULT_PORT = 22;
+    const DEFAULT_TIMEOUT = 10;
+    const DEFAULT_USERNAME = '';
+
     /**
      * @param string $host
      */
@@ -13,9 +17,10 @@ final class SftpOptions extends EncapsulatedOptions
         $this->set('host', $host);
 
         $this->setDefaults([
-            'port' => 22,
-            'timeout' => 10,
-            'username' => ''
+            'port' => self::DEFAULT_PORT,
+            'timeout' => self::DEFAULT_TIMEOUT,
+            'username' => self::DEFAULT_USERNAME,
+            'authenticationMethod' => AuthenticationMethod::BASIC(),
         ]);
     }
 
@@ -43,21 +48,65 @@ final class SftpOptions extends EncapsulatedOptions
     }
 
     /**
-     * @param string|RSA $authenticationSecurity
+     * @param RSA $rsaKey
      *
      * @return $this
      */
-    public function setAuthenticationSecurity($authenticationSecurity)
+    public function setRsaKey(RSA $rsaKey)
     {
-        return $this->set('authenticationSecurity', $authenticationSecurity);
+        return $this->set('rsaKey', $rsaKey);
+    }
+
+    /**
+     * @return RSA
+     */
+    public function getRsaKey()
+    {
+        return $this->get('rsaKey');
+    }
+
+    /**
+     * @param string $password
+     *
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        return $this->set('password', $password);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->get('password');
+    }
+
+    /**
+     * @param AuthenticationMethod $authenticationMethod
+     *
+     * @return $this
+     */
+    public function setAuthenticationMethod(AuthenticationMethod $authenticationMethod)
+    {
+        return $this->set('authenticationMethod', $authenticationMethod);
+    }
+
+    /**
+     * @return AuthenticationMethod
+     */
+    public function getAuthenticationMethod()
+    {
+        return $this->get('authenticationMethod');
     }
 
     /**
      * @return string|RSA
      */
-    public function getAuthenticationSecurity()
+    public function getAuthenticationCredentials()
     {
-        return $this->get('authenticationSecurity');
+        return $this->get(AuthenticationMethodToPropertyMapping::getMapping($this->getAuthenticationMethod()->value()));
     }
 
     /**

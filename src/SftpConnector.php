@@ -35,7 +35,7 @@ class SftpConnector implements Connector
             $options->getTimeout()
         );
 
-        if (!$sftp->login($options->getUsername(), $options->getAuthenticationSecurity())) {
+        if (!$sftp->login($options->getUsername(), $options->getAuthenticationCredentials())) {
             throw new SftpLoginException();
         }
 
