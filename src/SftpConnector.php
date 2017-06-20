@@ -25,7 +25,7 @@ class SftpConnector implements Connector
      */
     public function fetch($source, EncapsulatedOptions $options = null)
     {
-        if (!$options || !$options instanceof SftpConnector) {
+        if (!$options || !$options instanceof SftpOptions) {
             throw new \InvalidArgumentException('Options must be an instance of SftpOptions.');
         }
 
