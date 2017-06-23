@@ -16,7 +16,7 @@ final class SftpOptionsTest extends \PHPUnit_Framework_TestCase
         self::assertSame(SftpOptions::DEFAULT_PORT, $options->getPort());
         self::assertSame(SftpOptions::DEFAULT_TIMEOUT, $options->getTimeout());
         self::assertSame(SftpOptions::DEFAULT_USERNAME, $options->getUsername());
-        self::assertSame(AuthenticationMethod::BASIC(), $options->getAuthenticationMethod());
+        self::assertSame(AuthenticationMethod::NONE(), $options->getAuthenticationMethod());
     }
 
     public function testHost()

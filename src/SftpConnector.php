@@ -33,14 +33,31 @@ class SftpConnector implements Connector
             throw new Ssh2ConnectionException;
         }
 
-        ssh2_auth_pubkey_file(
-            $session,
-            $options->getUsername(),
-            $options->getPublicKey(),
-            $options->getPrivateKey(),
-            $options->getPassword()
-        );
+        $this->ssh2Authenticate($session, $options);
 
         return fopen("ssh2.sftp://$session/$source", 'r');
+    }
+
+    private function ssh2Authenticate($session, SftpOptions $options)
+    {
+        switch ($options->getAuthenticationMethod()) {
+            case AuthenticationMethod::NONE():
+                ssh2_auth_none($session, $options->getUsername());
+                break;
+
+            case AuthenticationMethod::PUBLIC_KEY():
+                ssh2_auth_pubkey_file(
+                    $session,
+                    $options->getUsername(),
+                    $options->getPublicKey(),
+                    $options->getPrivateKey(),
+                    $options->getPassword()
+                );
+                break;
+
+            case AuthenticationMethod::PASSWORD():
+                ssh2_auth_password($session, $options->getUsername(), $options->getPassword());
+                break;
+        }
     }
 }

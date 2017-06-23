@@ -21,7 +21,7 @@ final class SftpOptions extends EncapsulatedOptions
             'timeout' => self::DEFAULT_TIMEOUT,
             'username' => self::DEFAULT_USERNAME,
             'password' => self::DEFAULT_PASSWORD,
-            'authenticationMethod' => AuthenticationMethod::BASIC(),
+            'authenticationMethod' => AuthenticationMethod::NONE(),
         ]);
     }
 
