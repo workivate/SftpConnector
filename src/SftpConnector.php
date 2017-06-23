@@ -21,7 +21,7 @@ class SftpConnector implements Connector
      * @return resource Response.
      *
      * @throws \InvalidArgumentException Options is not an instance of SftpOptions.
-     * @throws SftpLoginException Couldn't log in to the server.
+     * @throws Ssh2ConnectionException Couldn't connect to the server.
      */
     public function fetch($source, EncapsulatedOptions $options = null)
     {
@@ -30,7 +30,7 @@ class SftpConnector implements Connector
         }
 
         if (!$session = \ssh2_connect($options->getHost(), $options->getPort())) {
-            throw new SftpLoginException();
+            throw new Ssh2ConnectionException();
         }
 
         \ssh2_auth_pubkey_file($session, $options->getUsername(), '', $options->getAuthenticationCredentials());

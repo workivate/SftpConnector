@@ -4,9 +4,9 @@ namespace SftpConnector;
 use ScriptFUSION\Porter\Connector\RecoverableConnectorException;
 
 /**
- * The exception that is thrown when an SFTP login error occurs.
+ * The exception that is thrown when an SSH2 connection error occurs.
  */
-class SftpLoginException extends RecoverableConnectorException
+class Ssh2ConnectionException extends RecoverableConnectorException
 {
     // Intentionally empty.
 }
