@@ -1,12 +1,12 @@
 <?php
 namespace SftpConnector;
 
-use phpseclib\Net\SFTP;
 use ScriptFUSION\Porter\Connector\Connector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
+use SftpConnector\Ssh2\Ssh2Adapter;
 
 /**
- * Fetches data form an SFTP server via Phpseclib library.
+ * Fetches data form an SFTP server via libssh2 library.
  *
  * @link https://github.com/phpseclib/phpseclib
  */
@@ -29,49 +29,11 @@ class SftpConnector implements Connector
             throw new \InvalidArgumentException('Options must be an instance of SftpOptions.');
         }
 
-        if (!$session = @ssh2_connect($options->getHost(), $options->getPort())) {
-            throw new Ssh2ConnectionException;
-        }
+        $ssh2Adapter = new Ssh2Adapter;
+        $ssh2Adapter->connect($options->getHost(), $options->getPort());
 
-        $resource = ssh2_sftp($this->authenticate($session, $options));
+        $resource = ssh2_sftp($ssh2Adapter->authenticate($options)->getSession());
 
         return fopen("ssh2.sftp://$resource/$source", 'r');
-    }
-
-    /**
-     * @param resource $session
-     * @param SftpOptions $options
-     *
-     * @return resource|array|bool
-     *
-     * @throws \InvalidArgumentException The authentication method specified is incorrect.
-     *
-     * @see AuthenticationMethod
-     */
-    private function authenticate($session, SftpOptions $options)
-    {
-        switch ($options->getAuthenticationMethod()) {
-            case AuthenticationMethod::NONE():
-                ssh2_auth_none($session, $options->getUsername());
-                break;
-
-            case AuthenticationMethod::PUBLIC_KEY():
-                ssh2_auth_pubkey_file(
-                    $session,
-                    $options->getUsername(),
-                    $options->getPublicKey(),
-                    $options->getPrivateKey(),
-                    $options->getPassword()
-                );
-                break;
-            case AuthenticationMethod::PASSWORD():
-                ssh2_auth_password($session, $options->getUsername(), $options->getPassword());
-                break;
-
-            default:
-                throw new \InvalidArgumentException('An invalid authentication method has been provided.');
-        }
-
-        return $session;
     }
 }
