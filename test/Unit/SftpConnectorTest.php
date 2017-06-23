@@ -5,7 +5,6 @@ use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 use SftpConnector\SftpConnector;
 use SftpConnector\Ssh2ConnectionException;
 use SftpConnector\SftpOptions;
-use SftpConnectorTest\Fixtures\SftpOptionsFixture;
 
 class SftpConnectorTest extends \PHPUnit_Framework_TestCase
 {

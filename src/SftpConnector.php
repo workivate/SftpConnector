@@ -44,7 +44,7 @@ class SftpConnector implements Connector
      *
      * @return resource|array|bool
      *
-     * @throws InvalidAuthenticationMethodException The authentication method specified is incorrect.
+     * @throws \InvalidArgumentException The authentication method specified is incorrect.
      *
      * @see AuthenticationMethod
      */
@@ -69,7 +69,7 @@ class SftpConnector implements Connector
                 break;
 
             default:
-                throw new InvalidAuthenticationMethodException;
+                throw new \InvalidArgumentException('An invalid authentication method has been provided.');
         }
 
         return $session;
