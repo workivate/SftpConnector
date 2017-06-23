@@ -1,7 +1,6 @@
 <?php
 namespace SftpConnectorTest\Unit;
 
-use phpseclib\Crypt\RSA;
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
 
@@ -17,7 +16,7 @@ final class SftpOptionsTest extends \PHPUnit_Framework_TestCase
         self::assertSame(SftpOptions::DEFAULT_PORT, $options->getPort());
         self::assertSame(SftpOptions::DEFAULT_TIMEOUT, $options->getTimeout());
         self::assertSame(SftpOptions::DEFAULT_USERNAME, $options->getUsername());
-        self::assertInternalType('string', $options->getAuthenticationCredentials());
+        self::assertSame(AuthenticationMethod::BASIC(), $options->getAuthenticationMethod());
     }
 
     public function testHost()
@@ -30,25 +29,9 @@ final class SftpOptionsTest extends \PHPUnit_Framework_TestCase
         self::assertSame($port = 23, (new SftpOptions(self::HOST))->setPort($port)->getPort());
     }
 
-    public function testRsaKey()
-    {
-        $rsa = new RSA;
-        $options = new SftpOptions(self::HOST);
-
-        $options->setAuthenticationMethod(AuthenticationMethod::RSA());
-        $options->setRsaKey($rsa);
-
-        self::assertSame($rsa, $options->getAuthenticationCredentials());
-    }
-
     public function testPassword()
     {
-        $options = new SftpOptions(self::HOST);
-
-        $options->setAuthenticationMethod(AuthenticationMethod::BASIC());
-        $options->setPassword('bar');
-
-        self::assertSame('bar', $options->getAuthenticationCredentials());
+        self::assertSame($password = 'bar', (new SftpOptions(self::HOST))->setPassword($password)->getPassword());
     }
 
     public function testTimeout()

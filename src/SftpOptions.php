@@ -1,7 +1,6 @@
 <?php
 namespace SftpConnector;
 
-use phpseclib\Crypt\RSA;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 
 final class SftpOptions extends EncapsulatedOptions
@@ -50,13 +49,39 @@ final class SftpOptions extends EncapsulatedOptions
     }
 
     /**
-     * @param RSA $rsaKey
+     * @param string $publicKey
      *
      * @return $this
      */
-    public function setRsaKey(RSA $rsaKey)
+    public function setPublicKey($publicKey)
     {
-        return $this->set('rsaKey', $rsaKey);
+        return $this->set('publicKey', $publicKey);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPublicKey()
+    {
+        return $this->get('publicKey');
+    }
+
+    /**
+     * @param string $privateKey
+     *
+     * @return $this
+     */
+    public function setPrivateKey($privateKey)
+    {
+        return $this->set('privateKey', $privateKey);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrivateKey()
+    {
+        return $this->get('privateKey');
     }
 
     /**
@@ -70,6 +95,14 @@ final class SftpOptions extends EncapsulatedOptions
     }
 
     /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->get('password');
+    }
+
+    /**
      * @param AuthenticationMethod $authenticationMethod
      *
      * @return $this
@@ -80,11 +113,11 @@ final class SftpOptions extends EncapsulatedOptions
     }
 
     /**
-     * @return string|RSA
+     * @return AuthenticationMethod
      */
-    public function getAuthenticationCredentials()
+    public function getAuthenticationMethod()
     {
-        return $this->get(AuthenticationMethodToPropertyMapping::getMapping($this->getAuthenticationMethod()));
+        return $this->get('authenticationMethod');
     }
 
     /**
@@ -121,13 +154,5 @@ final class SftpOptions extends EncapsulatedOptions
     public function getUsername()
     {
         return $this->get('username');
-    }
-
-    /**
-     * @return AuthenticationMethod
-     */
-    private function getAuthenticationMethod()
-    {
-        return $this->get('authenticationMethod');
     }
 }
