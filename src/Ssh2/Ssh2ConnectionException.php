@@ -1,5 +1,5 @@
 <?php
-namespace SftpConnector;
+namespace SftpConnector\Ssh2;
 
 use ScriptFUSION\Porter\Connector\RecoverableConnectorException;
 

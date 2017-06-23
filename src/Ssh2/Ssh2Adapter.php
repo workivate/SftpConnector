@@ -3,7 +3,7 @@ namespace SftpConnector\Ssh2;
 
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
-use SftpConnector\Ssh2ConnectionException;
+use SftpConnector\Ssh2\Ssh2ConnectionException;
 
 class Ssh2Adapter
 {

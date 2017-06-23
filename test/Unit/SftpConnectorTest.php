@@ -3,7 +3,7 @@ namespace SftpConnectorTest\Unit;
 
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 use SftpConnector\SftpConnector;
-use SftpConnector\Ssh2ConnectionException;
+use SftpConnector\Ssh2\Ssh2ConnectionException;
 use SftpConnector\SftpOptions;
 
 class SftpConnectorTest extends \PHPUnit_Framework_TestCase

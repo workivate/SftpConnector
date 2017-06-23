@@ -4,6 +4,7 @@ namespace SftpConnector;
 use ScriptFUSION\Porter\Connector\Connector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 use SftpConnector\Ssh2\Ssh2Adapter;
+use SftpConnector\Ssh2\Ssh2ConnectionException;
 
 /**
  * Fetches data form an SFTP server via libssh2 library.
