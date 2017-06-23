@@ -33,12 +33,22 @@ class SftpConnector implements Connector
             throw new Ssh2ConnectionException;
         }
 
-        $this->ssh2Authenticate($session, $options);
+        $resource = ssh2_sftp($this->authenticate($session, $options));
 
-        return fopen("ssh2.sftp://$session/$source", 'r');
+        return fopen("ssh2.sftp://$resource/$source", 'r');
     }
 
-    private function ssh2Authenticate($session, SftpOptions $options)
+    /**
+     * @param resource $session
+     * @param SftpOptions $options
+     *
+     * @return resource|array|bool
+     *
+     * @throws InvalidAuthenticationMethodException The authentication method specified is incorrect.
+     *
+     * @see AuthenticationMethod
+     */
+    private function authenticate($session, SftpOptions $options)
     {
         switch ($options->getAuthenticationMethod()) {
             case AuthenticationMethod::NONE():
@@ -54,10 +64,14 @@ class SftpConnector implements Connector
                     $options->getPassword()
                 );
                 break;
-
             case AuthenticationMethod::PASSWORD():
                 ssh2_auth_password($session, $options->getUsername(), $options->getPassword());
                 break;
+
+            default:
+                throw new InvalidAuthenticationMethodException;
         }
+
+        return $session;
     }
 }

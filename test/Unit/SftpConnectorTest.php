@@ -22,9 +22,4 @@ class SftpConnectorTest extends \PHPUnit_Framework_TestCase
 
         (new SftpConnector)->fetch('foo', new SftpOptions('foo'));
     }
-
-    public function testSsh2Connection()
-    {
-        (new SftpConnector)->fetch('foo', SftpOptionsFixture::create());
-    }
 }
