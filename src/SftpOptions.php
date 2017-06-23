@@ -7,19 +7,19 @@ final class SftpOptions extends EncapsulatedOptions
 {
     const DEFAULT_PORT = 22;
     const DEFAULT_TIMEOUT = 10;
-    const DEFAULT_USERNAME = '';
     const DEFAULT_PASSWORD = '';
 
     /**
      * @param string $host
+     * @param string $username
      */
-    public function __construct($host) {
+    public function __construct($host, $username) {
         $this->set('host', $host);
+        $this->set('username', $username);
 
         $this->setDefaults([
             'port' => self::DEFAULT_PORT,
             'timeout' => self::DEFAULT_TIMEOUT,
-            'username' => self::DEFAULT_USERNAME,
             'password' => self::DEFAULT_PASSWORD,
             'authenticationMethod' => AuthenticationMethod::NONE(),
         ]);
@@ -28,6 +28,14 @@ final class SftpOptions extends EncapsulatedOptions
     public function getHost()
     {
         return $this->get('host');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->get('username');
     }
 
     /**
@@ -46,6 +54,42 @@ final class SftpOptions extends EncapsulatedOptions
     public function getPort()
     {
         return $this->get('port');
+    }
+
+    /**
+     * @param int $timeout
+     *
+     * @return $this
+     */
+    public function setTimeout($timeout)
+    {
+        return $this->set('timeout', $timeout);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimeout()
+    {
+        return $this->get('timeout');
+    }
+
+    /**
+     * @param AuthenticationMethod $authenticationMethod
+     *
+     * @return $this
+     */
+    public function setAuthenticationMethod(AuthenticationMethod $authenticationMethod)
+    {
+        return $this->set('authenticationMethod', $authenticationMethod);
+    }
+
+    /**
+     * @return AuthenticationMethod
+     */
+    public function getAuthenticationMethod()
+    {
+        return $this->get('authenticationMethod');
     }
 
     /**
@@ -100,59 +144,5 @@ final class SftpOptions extends EncapsulatedOptions
     public function getPassword()
     {
         return $this->get('password');
-    }
-
-    /**
-     * @param AuthenticationMethod $authenticationMethod
-     *
-     * @return $this
-     */
-    public function setAuthenticationMethod(AuthenticationMethod $authenticationMethod)
-    {
-        return $this->set('authenticationMethod', $authenticationMethod);
-    }
-
-    /**
-     * @return AuthenticationMethod
-     */
-    public function getAuthenticationMethod()
-    {
-        return $this->get('authenticationMethod');
-    }
-
-    /**
-     * @param int $timeout
-     *
-     * @return $this
-     */
-    public function setTimeout($timeout)
-    {
-        return $this->set('timeout', $timeout);
-    }
-
-    /**
-     * @return int
-     */
-    public function getTimeout()
-    {
-        return $this->get('timeout');
-    }
-
-    /**
-     * @param string $username
-     *
-     * @return $this
-     */
-    public function setUsername($username)
-    {
-        return $this->set('username', $username);
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->get('username');
     }
 }

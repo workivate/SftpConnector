@@ -19,6 +19,6 @@ class SftpConnectorTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(Ssh2ConnectionException::class);
 
-        (new SftpConnector)->fetch('foo', new SftpOptions('foo'));
+        (new SftpConnector)->fetch('foo', new SftpOptions('foo', 'bar'));
     }
 }
