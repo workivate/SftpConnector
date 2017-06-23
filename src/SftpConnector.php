@@ -18,7 +18,7 @@ class SftpConnector implements Connector
      * @param string $source Path to the file.
      * @param SftpOptions $options Mandatory options to connect to the FTP.
      *
-     * @return string Response.
+     * @return resource Response.
      *
      * @throws \InvalidArgumentException Options is not an instance of SftpOptions.
      * @throws SftpLoginException Couldn't log in to the server.
@@ -29,16 +29,12 @@ class SftpConnector implements Connector
             throw new \InvalidArgumentException('Options must be an instance of SftpOptions.');
         }
 
-        $sftp = new SFTP(
-            $options->getHost(),
-            $options->getPort(),
-            $options->getTimeout()
-        );
-
-        if (!$sftp->login($options->getUsername(), $options->getAuthenticationCredentials())) {
+        if (!$session = \ssh2_connect($options->getHost(), $options->getPort())) {
             throw new SftpLoginException();
         }
 
-        return $sftp->get($source);
+        \ssh2_auth_pubkey_file($session, $options->getUsername(), '', $options->getAuthenticationCredentials());
+
+        return fopen("ssh2.sftp://$session/$source", 'r');
     }
 }

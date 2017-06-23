@@ -9,7 +9,6 @@
   ],
   "require": {
     "scriptfusion/porter": ">=3,<4",
-    "phpseclib/phpseclib": "^2.0",
     "eloquent/enumeration": "^5"
   },
   "require-dev": {
