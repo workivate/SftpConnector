@@ -29,11 +29,17 @@ class SftpConnector implements Connector
             throw new \InvalidArgumentException('Options must be an instance of SftpOptions.');
         }
 
-        if (!$session = \ssh2_connect($options->getHost(), $options->getPort())) {
-            throw new Ssh2ConnectionException();
+        if (!$session = @ssh2_connect($options->getHost(), $options->getPort())) {
+            throw new Ssh2ConnectionException;
         }
 
-        \ssh2_auth_pubkey_file($session, $options->getUsername(), '', $options->getAuthenticationCredentials());
+        ssh2_auth_pubkey_file(
+            $session,
+            $options->getUsername(),
+            $options->getPublicKey(),
+            $options->getPrivateKey(),
+            $options->getPassword()
+        );
 
         return fopen("ssh2.sftp://$session/$source", 'r');
     }

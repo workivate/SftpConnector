@@ -2,6 +2,7 @@
 namespace SftpConnectorTest\Unit;
 
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
+use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpConnector;
 use SftpConnector\Ssh2ConnectionException;
 use SftpConnector\SftpOptions;
@@ -19,6 +20,6 @@ class SftpConnectorTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(Ssh2ConnectionException::class);
 
-        (new SftpConnector)->fetch('foo', new SftpOptions('bar'));
+        (new SftpConnector)->fetch('foo', new SftpOptions('foo'));
     }
 }
