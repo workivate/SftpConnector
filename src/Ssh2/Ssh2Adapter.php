@@ -3,7 +3,6 @@ namespace SftpConnector\Ssh2;
 
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
-use SftpConnector\Ssh2\Ssh2ConnectionException;
 
 class Ssh2Adapter
 {
@@ -47,20 +46,20 @@ class Ssh2Adapter
     {
         switch ($options->getAuthenticationMethod()) {
             case AuthenticationMethod::NONE():
-                ssh2_auth_none($this->session, $options->getUsername());
+                $this->noAuthentication($options->getUsername());
                 break;
 
             case AuthenticationMethod::PUBLIC_KEY():
-                ssh2_auth_pubkey_file(
-                    $this->session,
+                $this->publicKeyAuthentication(
                     $options->getUsername(),
                     $options->getPublicKey(),
                     $options->getPrivateKey(),
                     $options->getPassword()
                 );
                 break;
+
             case AuthenticationMethod::PASSWORD():
-                ssh2_auth_password($this->session, $options->getUsername(), $options->getPassword());
+                $this->passwordAuthentication($options->getUsername(), $options->getPassword());
                 break;
 
             default:
@@ -68,5 +67,39 @@ class Ssh2Adapter
         }
 
         return $this;
+    }
+
+    /**
+     * @param string $username
+     */
+    private function noAuthentication($username)
+    {
+        ssh2_auth_none($this->session, $username);
+    }
+
+    /**
+     * @param string $username
+     * @param string $publicKey
+     * @param string $privateKey
+     * @param string $passphrase
+     */
+    private function publicKeyAuthentication($username, $publicKey, $privateKey, $passphrase)
+    {
+        ssh2_auth_pubkey_file(
+            $this->session,
+            $username,
+            $publicKey,
+            $privateKey,
+            $passphrase
+        );
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     */
+    private function passwordAuthentication($username, $password)
+    {
+        ssh2_auth_password($this->session, $username, $password);
     }
 }
