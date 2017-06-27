@@ -12,6 +12,11 @@ class Libssh2Adapter implements SftpAdapter
      */
     private $session;
 
+    public function __destruct()
+    {
+        $this->disconnect();
+    }
+
     /**
      * @param string $host
      * @param int $port
