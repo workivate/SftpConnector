@@ -4,14 +4,22 @@ namespace SftpConnectorTest\Fixtures;
 use SftpConnector\Libssh2\NotConnectedException;
 use SftpConnector\SftpOptions;
 use SftpConnector\SftpAdapter;
+use SftpConnector\Ssh2ConnectionException;
 
 class MockAdapter implements SftpAdapter
 {
+    const VALID_HOST = 'foo';
+    const VALID_SESSION = 'baz';
+
     private $session;
 
     public function connect($host, $post = 22)
     {
-        $this->session = 'foo';
+        if ($host !== self::VALID_HOST) {
+            throw new Ssh2ConnectionException;
+        }
+
+        $this->session = self::VALID_SESSION;
 
         return $this;
     }
@@ -31,7 +39,7 @@ class MockAdapter implements SftpAdapter
             throw new NotConnectedException;
         }
 
-        return fopen(__DIR__ . '/fixture.json', 'r');
+        return fopen($source, 'r');
     }
 
     public function disconnect()
