@@ -3,7 +3,7 @@ namespace SftpConnector;
 
 use ScriptFUSION\Porter\Connector\Connector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
-use SftpConnector\Ssh2\Ssh2Adapter;
+use SftpConnector\Ssh2\Libssh2Adapter;
 use SftpConnector\Ssh2\Ssh2ConnectionException;
 
 /**
@@ -15,9 +15,9 @@ class SftpConnector implements Connector
 {
     private $adapter;
 
-    public function __construct(Ssh2LibraryAdapter $adapter = null)
+    public function __construct(SftpAdapter $adapter = null)
     {
-        $this->adapter = $adapter ?: new Ssh2Adapter;
+        $this->adapter = $adapter ?: new Libssh2Adapter;
     }
 
     /**

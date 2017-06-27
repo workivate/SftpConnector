@@ -1,10 +1,8 @@
 <?php
 namespace SftpConnector;
 
-interface Ssh2LibraryAdapter
+interface SftpAdapter
 {
-    public function getSession();
-
     /**
      * @param string $host
      * @param int $post
@@ -22,6 +20,7 @@ interface Ssh2LibraryAdapter
 
     /**
      * @param string $source
+     *
      * @return resource
      */
     public function fetch($source);

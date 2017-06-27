@@ -2,14 +2,10 @@
 namespace SftpConnectorTest\Fixtures;
 
 use SftpConnector\SftpOptions;
-use SftpConnector\Ssh2LibraryAdapter;
+use SftpConnector\SftpAdapter;
 
-class MockAdapter implements Ssh2LibraryAdapter
+class MockAdapter implements SftpAdapter
 {
-    public function getSession()
-    {
-    }
-
     public function connect($host, $post = 22)
     {
         return $this;
