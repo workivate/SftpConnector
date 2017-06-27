@@ -1,5 +1,5 @@
 <?php
-namespace SftpConnector\Ssh2;
+namespace SftpConnector\Libssh2;
 
 /**
  * The exception that is thrown if an action is executed while not being connected.

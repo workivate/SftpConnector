@@ -1,9 +1,10 @@
 <?php
-namespace SftpConnector\Ssh2;
+namespace SftpConnector\Libssh2;
 
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
 use SftpConnector\SftpAdapter;
+use SftpConnector\Ssh2ConnectionException;
 
 class Libssh2Adapter implements SftpAdapter
 {
@@ -28,7 +29,7 @@ class Libssh2Adapter implements SftpAdapter
     public function connect($host, $port = 22)
     {
         if (!$this->session = @ssh2_connect($host, $port)) {
-            throw new Ssh2ConnectionException();
+            throw new Ssh2ConnectionException;
         }
 
         return $this;
