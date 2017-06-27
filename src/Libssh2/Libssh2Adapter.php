@@ -89,9 +89,9 @@ class Libssh2Adapter implements SftpAdapter
             throw new NotConnectedException;
         }
 
-        $this->convertSsh2ResourceToSftpResource();
+        $sftp = ssh2_sftp($this->session);
 
-        return fopen("ssh2.sftp://$this->session/$source", 'r');
+        return fopen("ssh2.sftp://$sftp/$source", 'r');
     }
 
     public function disconnect()
@@ -136,10 +136,5 @@ class Libssh2Adapter implements SftpAdapter
     private function passwordAuthentication($username, $password)
     {
         ssh2_auth_password($this->session, $username, $password);
-    }
-
-    private function convertSsh2ResourceToSftpResource()
-    {
-        $this->session = ssh2_sftp($this->session);
     }
 }
