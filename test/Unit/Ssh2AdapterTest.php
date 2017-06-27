@@ -10,6 +10,6 @@ final class Ssh2AdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(Ssh2ConnectionException::class);
 
-        (new Ssh2Adapter())->connect('foo');
+        (new Ssh2Adapter)->connect('foo');
     }
 }

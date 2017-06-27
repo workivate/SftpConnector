@@ -3,8 +3,9 @@ namespace SftpConnector\Ssh2;
 
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
+use SftpConnector\Ssh2LibraryAdapter;
 
-class Ssh2Adapter
+class Ssh2Adapter implements Ssh2LibraryAdapter
 {
     private $session;
 
@@ -69,6 +70,13 @@ class Ssh2Adapter
         return $this;
     }
 
+    public function fetch($source)
+    {
+        $this->convertSsh2ResourceToSftpResource();
+
+        return fopen("ssh2.sftp://{$this->getSession()}/$source", 'r');
+    }
+
     /**
      * @param string $username
      */
@@ -101,5 +109,10 @@ class Ssh2Adapter
     private function passwordAuthentication($username, $password)
     {
         ssh2_auth_password($this->session, $username, $password);
+    }
+
+    private function convertSsh2ResourceToSftpResource()
+    {
+        $this->session = ssh2_sftp($this->session);
     }
 }

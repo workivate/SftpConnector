@@ -3,7 +3,6 @@ namespace SftpConnector;
 
 use ScriptFUSION\Porter\Connector\Connector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
-use SftpConnector\Ssh2\Ssh2Adapter;
 use SftpConnector\Ssh2\Ssh2ConnectionException;
 
 /**
@@ -13,6 +12,13 @@ use SftpConnector\Ssh2\Ssh2ConnectionException;
  */
 class SftpConnector implements Connector
 {
+    private $adapter;
+
+    public function __construct(Ssh2LibraryAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -30,11 +36,9 @@ class SftpConnector implements Connector
             throw new \InvalidArgumentException('Options must be an instance of SftpOptions.');
         }
 
-        $ssh2Adapter = new Ssh2Adapter;
-        $ssh2Adapter->connect($options->getHost(), $options->getPort());
+        $this->adapter->connect($options->getHost(), $options->getPort());
+        $this->adapter->authenticate($options);
 
-        $resource = ssh2_sftp($ssh2Adapter->authenticate($options)->getSession());
-
-        return fopen("ssh2.sftp://$resource/$source", 'r');
+        return $this->adapter->fetch($source);
     }
 }
