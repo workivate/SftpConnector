@@ -24,4 +24,9 @@ interface SftpAdapter
      * @return resource
      */
     public function fetch($source);
+
+    /**
+     * @return $this
+     */
+    public function disconnect();
 }

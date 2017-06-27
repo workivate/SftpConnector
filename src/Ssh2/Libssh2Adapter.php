@@ -35,11 +35,16 @@ class Libssh2Adapter implements SftpAdapter
      * @return $this
      *
      * @throws \InvalidArgumentException The authentication method specified is incorrect.
+     * @throws NotConnectedException The connection must be established before executing an action.
      *
      * @see AuthenticationMethod
      */
     public function authenticate(SftpOptions $options)
     {
+        if (!$this->session) {
+            throw new NotConnectedException;
+        }
+
         switch ($options->getAuthenticationMethod()) {
             case AuthenticationMethod::NONE():
                 $this->noAuthentication($options->getUsername());
@@ -65,11 +70,32 @@ class Libssh2Adapter implements SftpAdapter
         return $this;
     }
 
+    /**
+     * @param string $source
+     *
+     * @return resource
+     *
+     * @throws NotConnectedException The connection must be established before executing an action.
+     */
     public function fetch($source)
     {
+        if (!$this->session) {
+            throw new NotConnectedException;
+        }
+
         $this->convertSsh2ResourceToSftpResource();
 
         return fopen("ssh2.sftp://$this->session/$source", 'r');
+    }
+
+    public function disconnect()
+    {
+        if ($this->session) {
+            ssh2_exec($this->session, 'exit');
+            $this->session = null;
+        }
+
+        return $this;
     }
 
     /**

@@ -20,4 +20,9 @@ class MockAdapter implements SftpAdapter
     {
         return fopen(__DIR__ . '/fixture.json', 'r');
     }
+
+    public function disconnect()
+    {
+        return $this;
+    }
 }

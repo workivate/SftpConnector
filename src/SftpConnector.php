@@ -4,10 +4,11 @@ namespace SftpConnector;
 use ScriptFUSION\Porter\Connector\Connector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
 use SftpConnector\Ssh2\Libssh2Adapter;
+use SftpConnector\Ssh2\NotConnectedException;
 use SftpConnector\Ssh2\Ssh2ConnectionException;
 
 /**
- * Fetches data form an SFTP server via libssh2 library.
+ * Fetches data form an SFTP server via a library specific adapter (libssh2 by default).
  *
  * @link https://github.com/phpseclib/phpseclib
  */
@@ -28,6 +29,7 @@ class SftpConnector implements Connector
      *
      * @return resource Response.
      *
+     * @throws NotConnectedException The connection must be established before executing an action.
      * @throws \InvalidArgumentException Options is not an instance of SftpOptions.
      * @throws Ssh2ConnectionException Couldn't connect to the server.
      */
@@ -39,7 +41,9 @@ class SftpConnector implements Connector
 
         $this->adapter->connect($options->getHost(), $options->getPort());
         $this->adapter->authenticate($options);
+        $resource = $this->adapter->fetch($source);
+        $this->adapter->disconnect();
 
-        return $this->adapter->fetch($source);
+        return $resource;
     }
 }
