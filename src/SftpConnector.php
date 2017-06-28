@@ -3,8 +3,8 @@ namespace SftpConnector;
 
 use ScriptFUSION\Porter\Connector\Connector;
 use ScriptFUSION\Porter\Options\EncapsulatedOptions;
-use SftpConnector\Libssh2\Libssh2Adapter;
 use SftpConnector\Libssh2\NotConnectedException;
+use SftpConnector\Phpseclib\PhpseclibAdapter;
 
 /**
  * Fetches data form an SFTP server via a library specific adapter (libssh2 by default).
@@ -17,7 +17,7 @@ class SftpConnector implements Connector
 
     public function __construct(SftpAdapter $adapter = null)
     {
-        $this->adapter = $adapter ?: new Libssh2Adapter;
+        $this->adapter = $adapter ?: new PhpseclibAdapter;
     }
 
     /**
