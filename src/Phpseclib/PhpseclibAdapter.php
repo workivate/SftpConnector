@@ -20,6 +20,12 @@ class PhpseclibAdapter implements SftpAdapter
         $this->disconnect();
     }
 
+    /**
+     * @param string $host
+     * @param int $port
+     *
+     * @return $this
+     */
     public function connect($host, $port = 22)
     {
         $this->session = new SFTP($host, $port);
@@ -27,6 +33,14 @@ class PhpseclibAdapter implements SftpAdapter
         return $this;
     }
 
+    /**
+     * @param SftpOptions $options
+     *
+     * @return $this
+     *
+     * @throws \InvalidArgumentException The authentication method specified is incorrect.
+     * @throws Ssh2ConnectionException Couldn't log in to the remote server.
+     */
     public function authenticate(SftpOptions $options)
     {
         switch ($options->getAuthenticationMethod()) {
@@ -51,6 +65,11 @@ class PhpseclibAdapter implements SftpAdapter
         return $this;
     }
 
+    /**
+     * @param string $source
+     *
+     * @return string
+     */
     public function fetch($source)
     {
         return $this->session->get($source);
@@ -64,6 +83,12 @@ class PhpseclibAdapter implements SftpAdapter
         }
     }
 
+    /**
+     * @param string $username
+     * @param string|RSA|null $securityCredential
+     *
+     * @throws Ssh2ConnectionException Couldn't log in to the remote server.
+     */
     private function login($username, $securityCredential = null) {
 
         if (!@$this->session->login($username, $securityCredential)) {
