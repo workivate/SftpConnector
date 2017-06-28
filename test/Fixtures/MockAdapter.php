@@ -13,7 +13,7 @@ class MockAdapter implements SftpAdapter
 
     private $session;
 
-    public function connect($host, $post = 22)
+    public function connect($host, $port = 22)
     {
         if ($host !== self::VALID_HOST) {
             throw new Ssh2ConnectionException;

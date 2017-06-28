@@ -5,11 +5,11 @@ interface SftpAdapter
 {
     /**
      * @param string $host
-     * @param int $post
+     * @param int $port
      *
      * @return $this
      */
-    public function connect($host, $post = 22);
+    public function connect($host, $port = 22);
 
     /**
      * @param SftpOptions $options
