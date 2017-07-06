@@ -5,8 +5,8 @@ use phpseclib\Crypt\RSA;
 use phpseclib\Net\SFTP;
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpAdapter;
-use SftpConnector\SftpOptions;
 use SftpConnector\SftpConnectionException;
+use SftpConnector\SftpOptions;
 
 class PhpseclibAdapter implements SftpAdapter
 {
@@ -89,8 +89,8 @@ class PhpseclibAdapter implements SftpAdapter
      *
      * @throws SftpConnectionException Couldn't log in to the remote server.
      */
-    private function login($username, $securityCredential = null) {
-
+    private function login($username, $securityCredential = null)
+    {
         if (!@$this->session->login($username, $securityCredential)) {
             throw new SftpConnectionException;
         }

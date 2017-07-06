@@ -13,7 +13,8 @@ final class SftpOptions extends EncapsulatedOptions
      * @param string $host
      * @param string $username
      */
-    public function __construct($host, $username) {
+    public function __construct($host, $username)
+    {
         $this->set('host', $host);
         $this->set('username', $username);
 

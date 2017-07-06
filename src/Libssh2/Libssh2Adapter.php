@@ -2,9 +2,9 @@
 namespace SftpConnector\Libssh2;
 
 use SftpConnector\AuthenticationMethod;
-use SftpConnector\SftpOptions;
 use SftpConnector\SftpAdapter;
 use SftpConnector\SftpConnectionException;
+use SftpConnector\SftpOptions;
 
 class Libssh2Adapter implements SftpAdapter
 {

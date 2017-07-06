@@ -2,9 +2,9 @@
 namespace SftpConnectorTest\Fixtures;
 
 use SftpConnector\Libssh2\NotConnectedException;
-use SftpConnector\SftpOptions;
 use SftpConnector\SftpAdapter;
 use SftpConnector\SftpConnectionException;
+use SftpConnector\SftpOptions;
 
 class MockAdapter implements SftpAdapter
 {

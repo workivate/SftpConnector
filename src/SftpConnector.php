@@ -9,7 +9,7 @@ use SftpConnector\Phpseclib\PhpseclibAdapter;
 /**
  * Fetches data form an SFTP server via a library specific adapter (libssh2 by default).
  *
- * @link https://github.com/phpseclib/phpseclib
+ * @see https://github.com/phpseclib/phpseclib
  */
 class SftpConnector implements Connector
 {
