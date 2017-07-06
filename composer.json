@@ -1,5 +1,5 @@
 {
-  "name": "porter-connectors/sftp-connector",
+  "name": "connectors/sftp",
   "description": "SftpConnecter for Porter.",
   "authors": [
     {
@@ -7,6 +7,7 @@
       "email": "dorianfleury@gmail.com"
     }
   ],
+  "license": "GPL-3.0",
   "require": {
     "scriptfusion/porter": ">=3,<4",
     "eloquent/enumeration": "^5",
