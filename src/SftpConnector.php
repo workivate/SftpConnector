@@ -30,7 +30,7 @@ class SftpConnector implements Connector
      *
      * @throws NotConnectedException The connection must be established before executing an action.
      * @throws \InvalidArgumentException Options is not an instance of SftpOptions.
-     * @throws Ssh2ConnectionException Couldn't connect to the server.
+     * @throws SftpConnectionException Couldn't connect to the server.
      */
     public function fetch($source, EncapsulatedOptions $options = null)
     {

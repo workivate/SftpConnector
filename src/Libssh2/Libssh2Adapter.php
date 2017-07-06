@@ -4,7 +4,7 @@ namespace SftpConnector\Libssh2;
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpOptions;
 use SftpConnector\SftpAdapter;
-use SftpConnector\Ssh2ConnectionException;
+use SftpConnector\SftpConnectionException;
 
 class Libssh2Adapter implements SftpAdapter
 {
@@ -24,12 +24,12 @@ class Libssh2Adapter implements SftpAdapter
      *
      * @return $this
      *
-     * @throws Ssh2ConnectionException Couldn't connect to the server.
+     * @throws SftpConnectionException Couldn't connect to the server.
      */
     public function connect($host, $port = 22)
     {
         if (!$this->session = @ssh2_connect($host, $port)) {
-            throw new Ssh2ConnectionException;
+            throw new SftpConnectionException;
         }
 
         return $this;

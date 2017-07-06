@@ -6,7 +6,7 @@ use phpseclib\Net\SFTP;
 use SftpConnector\AuthenticationMethod;
 use SftpConnector\SftpAdapter;
 use SftpConnector\SftpOptions;
-use SftpConnector\Ssh2ConnectionException;
+use SftpConnector\SftpConnectionException;
 
 class PhpseclibAdapter implements SftpAdapter
 {
@@ -39,7 +39,7 @@ class PhpseclibAdapter implements SftpAdapter
      * @return $this
      *
      * @throws \InvalidArgumentException The authentication method specified is incorrect.
-     * @throws Ssh2ConnectionException Couldn't log in to the remote server.
+     * @throws SftpConnectionException Couldn't log in to the remote server.
      */
     public function authenticate(SftpOptions $options)
     {
@@ -87,12 +87,12 @@ class PhpseclibAdapter implements SftpAdapter
      * @param string $username
      * @param string|RSA|null $securityCredential
      *
-     * @throws Ssh2ConnectionException Couldn't log in to the remote server.
+     * @throws SftpConnectionException Couldn't log in to the remote server.
      */
     private function login($username, $securityCredential = null) {
 
         if (!@$this->session->login($username, $securityCredential)) {
-            throw new Ssh2ConnectionException;
+            throw new SftpConnectionException;
         }
     }
 }

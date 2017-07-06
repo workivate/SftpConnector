@@ -4,7 +4,7 @@ namespace SftpConnectorTest\Fixtures;
 use SftpConnector\Libssh2\NotConnectedException;
 use SftpConnector\SftpOptions;
 use SftpConnector\SftpAdapter;
-use SftpConnector\Ssh2ConnectionException;
+use SftpConnector\SftpConnectionException;
 
 class MockAdapter implements SftpAdapter
 {
@@ -16,7 +16,7 @@ class MockAdapter implements SftpAdapter
     public function connect($host, $port = 22)
     {
         if ($host !== self::VALID_HOST) {
-            throw new Ssh2ConnectionException;
+            throw new SftpConnectionException;
         }
 
         $this->session = self::VALID_SESSION;
