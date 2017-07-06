@@ -6,6 +6,9 @@ use SftpConnector\Libssh2\NotConnectedException;
 use SftpConnector\SftpConnectionException;
 use SftpConnector\SftpOptions;
 
+/**
+ * @requires extension ssh2
+ */
 final class Libssh2AdapterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFailedSsh2Connection()
