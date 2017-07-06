@@ -26,7 +26,7 @@ class SftpConnector implements Connector
      * @param string $source Path to the file.
      * @param SftpOptions $options Mandatory options to connect to the FTP.
      *
-     * @return resource Response.
+     * @return string Response.
      *
      * @throws NotConnectedException The connection must be established before executing an action.
      * @throws \InvalidArgumentException Options is not an instance of SftpOptions.
