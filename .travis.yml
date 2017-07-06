@@ -1,20 +1,26 @@
 notifications:
   email: false
 
-sudo: false
+dist: trusty
+sudo: true
+
+#addons:
+#  apt:
+#    packages:
+#      - libssh2
 
 language: php
 
 php:
-  - 5.5
+  #- 5.5
   - 5.6
-  - 7.0
-  - 7.1
+  #- 7.0
+  #- 7.1
 
 env:
   matrix:
     -
-    - DEPENDENCIES=--prefer-lowest
+    #- DEPENDENCIES=--prefer-lowest
 
 matrix:
   fast_finish: true
@@ -24,6 +30,8 @@ cache:
     - .composer/cache
 
 install:
+  - sudo apt-get install -y libssh2
+  - yes '' | pecl install ssh2
   - alias composer=composer\ -n && composer selfupdate
   - composer validate
   - composer update $DEPENDENCIES
