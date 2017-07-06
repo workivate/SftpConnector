@@ -7,7 +7,7 @@
       "email": "dorianfleury@gmail.com"
     }
   ],
-  "license": "GPL-3.0",
+  "license": "LGPL-3.0",
   "require": {
     "scriptfusion/porter": ">=3,<4",
     "eloquent/enumeration": "^5",
