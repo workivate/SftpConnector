@@ -13,14 +13,14 @@ final class Libssh2AdapterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFailedSsh2Connection()
     {
-        $this->expectException(SftpConnectionException::class);
+        $this->setExpectedException(SftpConnectionException::class);
 
         (new Libssh2Adapter)->connect('foo');
     }
 
     public function testNotConnectedAuthentication()
     {
-        $this->expectException(NotConnectedException::class);
+        $this->setExpectedException(NotConnectedException::class);
 
         $adapter = new Libssh2Adapter;
         $adapter->disconnect()->authenticate(new SftpOptions('foo', 'bar'));
@@ -28,7 +28,7 @@ final class Libssh2AdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testNotConnectedFetch()
     {
-        $this->expectException(NotConnectedException::class);
+        $this->setExpectedException(NotConnectedException::class);
 
         $adapter = new Libssh2Adapter;
         $adapter->disconnect()->fetch('foo');

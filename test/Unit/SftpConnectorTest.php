@@ -10,7 +10,7 @@ final class SftpConnectorTest extends \PHPUnit_Framework_TestCase
 {
     public function testInvalidOptionsType()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
 
         (new SftpConnector(new MockAdapter))->fetch('foo', \Mockery::mock(EncapsulatedOptions::class));
     }
