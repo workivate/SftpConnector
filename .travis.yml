@@ -3,6 +3,11 @@ notifications:
 
 sudo: false
 
+addons:
+  apt:
+    packages:
+      - libssh2-1-dev
+
 language: php
 
 php:
@@ -24,6 +29,7 @@ cache:
     - .composer/cache
 
 install:
+  - yes '' | pecl install ssh2 > /dev/null
   - alias composer=composer\ -n && composer selfupdate
   - composer validate
   - composer update $DEPENDENCIES
