@@ -11,7 +11,7 @@ class Libssh2Adapter implements SftpAdapter
     /**
      * @var resource
      */
-    private $session;
+    protected $session;
 
     public function __destruct()
     {

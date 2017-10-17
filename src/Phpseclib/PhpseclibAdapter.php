@@ -13,7 +13,7 @@ class PhpseclibAdapter implements SftpAdapter
     /**
      * @var SFTP
      */
-    private $session;
+    protected $session;
 
     public function __destruct()
     {

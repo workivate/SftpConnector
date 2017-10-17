@@ -13,7 +13,7 @@ use SftpConnector\Phpseclib\PhpseclibAdapter;
  */
 class SftpConnector implements Connector
 {
-    private $adapter;
+    protected $adapter;
 
     public function __construct(SftpAdapter $adapter = null)
     {
