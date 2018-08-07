@@ -1,5 +1,5 @@
 {
-  "name": "connectors/sftp",
+  "name": "workivate/sftp",
   "description": "SftpConnecter for Porter.",
   "authors": [
     {
